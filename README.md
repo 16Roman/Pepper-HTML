@@ -1,0 +1,1 @@
+These are HTML and CSS files with images and javascript. The Javascript found here will not work as intended becasue you must be connected to the LCCC Pepper robot, but the html and css works mostly as intended. Pepper's tablet screen is small, so different design choices were made to fit the small screen.
