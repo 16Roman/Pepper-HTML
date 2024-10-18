@@ -1,0 +1,141 @@
+
+<script>
+    //Reset back to homepage after being idle for too long
+var timeLimit = 5 * 60 * 1000; // 5 mins
+
+function displayHiddenText() {
+    var text = document.getElementById('hiddenText');
+    // Toggle the visibility of the text container
+    if (text.style.display === 'none') {
+        text.style.display = 'block';
+    } else {
+        text.style.display = 'none';
+    }
+}
+
+
+// Function to redirect to index page
+function redirectToIndex() {
+  window.location.href = "index.html";
+}
+
+// Function to reset timer
+function resetTimer() {
+  clearTimeout(timer);
+  timer = setTimeout(redirectToIndex, timeLimit);
+}
+
+// Start timer
+var timer = setTimeout(redirectToIndex, timeLimit);
+
+    // Reset timer on any user interaction
+    document.addEventListener("mousemove", resetTimer);
+    document.addEventListener("keypress", resetTimer);
+    document.addEventListener("touchstart", resetTimer);
+    document.addEventListener("touchend", resetTimer);
+    document.addEventListener("click", resetTimer);
+
+
+    function TalkButton() {
+        console.log("Button clicked!"); // Check if the function is called
+    var text = document.getElementById('hiddenText');
+    // Toggle the visibility of the text container
+    if (text.style.display === 'none') {
+        text.style.display = 'block';
+    } else {
+        text.style.display = 'none';
+    }
+        var greeting = "Here are some questions you can ask me! \\pau=500\\ Don't be afraid to ask!";
+
+        RobotUtils.onServices(function (ALLeds, ALTextToSpeech) {
+            ALLeds.randomEyes(2.0);
+             //ALTextToSpeech.say("Here are some questions you can ask me!");
+            ALTextToSpeech.say(greeting);
+        });
+    }
+
+    function exit() {
+         RobotUtils.onService(function (ALBehaviorManager) {
+        //ALBehaviorManager.stopBehavior("putBehaviorNameHere/behavior_1");
+        ALBehaviorManager.stopBehavior("pepper-70ad2c/behavior_1");
+  
+        });
+    };
+    function start() {
+            RobotUtils.onService(function (ALBehaviorManager) {
+        //ALBehaviorManager.stopBehavior("putBehaviorNameHere/behavior_1");
+        ALBehaviorManager.startBehavior("pepper-70ad2c/non_sensing_idle");
+        });
+    };
+</script>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LCCC Athletic Depatment</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/style.css"/>
+        <script src='js/fastclick.js'></script>
+        <script src='js/jquery-1.10.2.min.js'></script>
+        <script src='js/robotutils.js'></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body onload="start()">
+        <!-- Nav Bar -->
+        <nav>
+            <input type="image" src="img/close.png" class="ribbon" id="exit" onclick="exit()">
+            <div class="container">
+                <img src="img/logo.svg" alt="LCCC Logo" class="logo"/>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="sports.html">Sports</a></li>
+                    <li><a href="clubs.html">Clubs</a></li>
+                    <li><a href="facility.html">Facilities</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+    
+        <main>
+            <section class="main-button-group">
+               
+                <div class="container">
+                    <br>
+                    <div class="title">
+                        <h1>Welcome To The LCCC Fitness Center</h1>
+                        <h2>My name is Pepper!</h2>
+                    </div>
+                   
+                        <div id="hiddencontainer">
+                           
+                            <div id="hiddenText">
+                                <div class="row">
+                                    <div class="col">
+                                <h1>Here are Some Examples!</h1>
+                                <ul>
+                                    <li>"When does the gym close?"</li>
+                                    <li>"Where do I check in?"</li>
+                                    <li>"Good Morining"</li>
+                                    <li>"Tell me a joke"</li>
+                                    <li>"How fast are you?"</li>
+                                </ul>
+                            </div>
+                        </div>
+                       </div>
+                    </div>
+
+                    <div class="row">    
+                        <p id="pepperSayText"></p>
+                    </div>
+                </div>
+            </section>
+    
+            <button class="talk-button" onclick="TalkButton();displayHiddenText()">Talk To Me!</button>
+               
+        </main>
+       
+    </body>
+
+</html>

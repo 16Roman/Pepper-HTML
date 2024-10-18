@@ -1,0 +1,128 @@
+<script>
+
+    //Reset back to homepage after being idle for too long
+    var timeLimit = 5 * 60 * 1000; // 5 mins
+
+// Function to redirect to index page
+function redirectToIndex() {
+  window.location.href = "index.html";
+}
+
+// Function to reset timer
+function resetTimer() {
+  clearTimeout(timer);
+  timer = setTimeout(redirectToIndex, timeLimit);
+}
+
+// Start timer
+var timer = setTimeout(redirectToIndex, timeLimit);
+
+    // Reset timer on any user interaction
+    document.addEventListener("mousemove", resetTimer);
+    document.addEventListener("keypress", resetTimer);
+    document.addEventListener("touchstart", resetTimer);
+    document.addEventListener("touchend", resetTimer);
+    document.addEventListener("click", resetTimer);
+
+    function TalkButton() {
+        var greeting = "Here are some questions you can ask me! \\pau=500\\ Don't be afraid to ask!";
+
+        RobotUtils.onServices(function (ALLeds, ALTextToSpeech) {
+            ALLeds.randomEyes(2.0);
+             //ALTextToSpeech.say("Here are some questions you can ask me!");
+            ALTextToSpeech.say(greeting);
+        });
+
+        document.getElementById("pepperSayText").innerHTML = greeting;
+
+
+    }
+
+    function exit() {
+         RobotUtils.onService(function (ALBehaviorManager) {
+        //ALBehaviorManager.stopBehavior("putBehaviorNameHere/behavior_1");
+        ALBehaviorManager.stopBehavior("pepper-70ad2c/behavior_1");
+  
+        });
+    };
+
+    function start() {
+         RobotUtils.onService(function (ALBehaviorManager) {
+        //ALBehaviorManager.stopBehavior("putBehaviorNameHere/behavior_1");
+        ALBehaviorManager.startBehavior("pepper-70ad2c/non_sensing_idle");
+  
+        });
+    };
+</script>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>LCCC Athletic Depatment</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link type="text/css" rel="stylesheet" href="css/style.css"/>
+        <script src='js/fastclick.js'></script>
+        <script src='js/jquery-1.10.2.min.js'></script>
+        <script src='js/robotutils.js'></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/script.js"></script>
+    </head>
+    <body>
+        <!-- Nav Bar -->
+        <nav>
+            <input type="image" src="img/close.png" class="ribbon" id="exit" onclick="exit()">
+            <div class="container">
+                <img src="img/logo.svg" alt="LCCC Logo" class="logo"/>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="sports.html" class="active">Sports</a></li>
+                    <li><a href="clubs.html">Clubs</a></li>
+                    <li><a href="facility.html">Facilities</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main>
+            <section class="main-button-group">
+                <div class="container">
+                    <div class="row">
+                        <a href="bball.html" class="col">
+                            <img src="img/BballLogo.png" class="sport-logo">
+                            <h3>Basketball</h3><p>Mens/Womens</p>
+                        </a>
+                        <a href="baseball.html" class="col">
+                            <img src="img/baseballLogo.png" class="sport-logo">
+                            <h3>Baseball</h3><p>Mens</p>
+                        </a>
+                        <a href="crosscountry.html" class="col">
+                            <img src="img/crosscountryLogo.png" class="sport-logo">
+                            <h3>Cross Country</h3><p>Mens/Womens</p>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="esports.html" class="col">
+                            <img src="img/esportsLogo.png" class="sport-logo">
+                            <h3>ESports</h3><p>Co-Ed</p>
+                        </a>
+                        <a href="softball.html" class="col">
+                            <img src="img/softballLogo.png" class="sport-logo">
+                            <h3>Softball</h3><p>Womens</p>
+                        </a>
+                        <a href="volleyball.html" class="col">
+                            <img src="img/volleyballLogo.png" class="sport-logo">
+                            <h3>Volleyball</h3><p>Womens</p>
+                        </a>
+                    </div>
+                    <div class="row">
+                        <a href="index.html" class="col">
+                            <img src="img/backLogo.png" class="return-logo">
+                            <h1>Return</h1>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+       
+    </body>
+</html>
